@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ title or "Future Karaoke" }}</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/events/">Events</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <aside>
+    <div class="vertical-title">
+      <h1>Future Karaoke</h1>
+    </div>
+  </aside>
+
+  <main>
+    {{ content | safe }}
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Future Karaoke</p>
+  </footer>
+
+</body>
+</html>

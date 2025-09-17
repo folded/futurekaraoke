@@ -9,7 +9,7 @@ title: Upcoming Events
 
 ### Future Ghosts
 
-#### An evening of Poetry and Spoken Word @ The Count
+#### An evening of Poetry and Spoken Word @ The Count's
 
 Light refreshments available for purchase at the bar
 

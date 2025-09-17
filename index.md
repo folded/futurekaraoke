@@ -6,7 +6,7 @@ poster:
   altText: Future Ghosts
   col1:
     row1:
-      title: An evening of Poetry and Spoken Word @ The Count
+      title: An evening of Poetry and Spoken Word @ The Count's
       description: Light refreshments available for purchase at the bar
   col2:
     row1:

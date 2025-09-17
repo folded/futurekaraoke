@@ -18,6 +18,6 @@ poster:
 
 # Welcome to Future Karaoke
 
-## A place for imagination and sharing.
+## A place for imagination and sharing
 
 {% include "poster.njk" %}

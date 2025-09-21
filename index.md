@@ -14,6 +14,8 @@ poster:
       address: 48 Exhibition Walk, Clayton VIC 3168, Australia
       mapLink: https://www.google.com/maps/search/?api=1&query=48+Exhibition+Walk,+Clayton+VIC+3168,+Australia
       date: Tuesday 14th of October, 2025 -- 18:00 - 20:00
+  row3:
+    Future Ghosts is supported by funding from The School of Languages, Literatures, Cultures & Linguistics, Monash University.
 ---
 
 # Welcome to Future Karaoke

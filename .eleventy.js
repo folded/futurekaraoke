@@ -3,7 +3,6 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("images");
 
   return {
-    pathPrefix: "/futurekaraoke/",
     dir: {
       input: ".",
       includes: "_includes",

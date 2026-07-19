@@ -4,13 +4,14 @@ title: Future Karaoke
 ---
 
 <div class="hero">
-  <p class="eyebrow">Multi-disciplinary performance night</p>
-  <h1>A place for imagination <br>and sharing</h1>
-  <p class="lede">Poetry, spoken word and live experiment on a warm, unhurried stage — five-minute slots for polished pieces, works-in-progress and the beautifully unfinished.</p>
-  <p class="cta-row">
-    <a class="cta cta-primary" href="mailto:{{ site.email.speak }}">Sign up to perform</a>
-    <a class="cta cta-ghost" href="/events/">See what's on</a>
-  </p>
+  <div class="hero-card">
+    <h1>A place for imagination and sharing</h1>
+    <p class="lede">Poetry, spoken word and live experiment on a warm, unhurried stage. Five-minute slots for polished pieces, works-in-progress, and the beautifully unfinished.</p>
+    <p class="cta-row">
+      <a class="cta cta-primary" href="mailto:{{ site.email.speak }}">Sign up to perform</a>
+      <a class="cta cta-ghost" href="/events/">See what's on</a>
+    </p>
+  </div>
 </div>
 
 {% if events.featured %}

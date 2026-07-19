@@ -5,15 +5,15 @@ description: Upcoming and past Future Karaoke performance nights — poetry, spo
 ---
 
 <div class="page-head">
-  <p class="eyebrow">What's on</p>
   <h1>Events</h1>
 </div>
 
-{% if events.upcoming.length %}
 <section aria-label="Upcoming events">
+  <h2 class="section-label">What's on</h2>
+  {% if events.upcoming.length %}
   {% for ev in events.upcoming %}
   <article class="event-card reveal">
-    <h2>{{ ev.title }}</h2>
+    <h3>{{ ev.title }}</h3>
     <p class="event-tagline">{{ ev.tagline }}</p>
     {% if ev.note %}<p class="event-note">{{ ev.note }}</p>{% endif %}
     <dl class="event-details">
@@ -29,18 +29,18 @@ description: Upcoming and past Future Karaoke performance nights — poetry, spo
     {% if ev.funding %}<p class="event-funding">{{ ev.funding }}</p>{% endif %}
   </article>
   {% endfor %}
+  {% else %}
+  <div class="event-card reveal empty-state">
+    <h3>No shows on the calendar right now</h3>
+    <p>We're between nights — but not for long. Register your interest to perform and we'll let you know the moment the next date lands.</p>
+    <p class="event-actions"><a class="cta cta-primary" href="mailto:{{ site.email.speak }}">Get on the list</a></p>
+  </div>
+  {% endif %}
 </section>
-{% else %}
-<section class="event-card reveal empty-state">
-  <h2>No shows on the calendar right now</h2>
-  <p>We're between nights — but not for long. Register your interest to perform and we'll let you know the moment the next date lands.</p>
-  <p class="event-actions"><a class="cta cta-primary" href="mailto:{{ site.email.speak }}">Get on the list</a></p>
-</section>
-{% endif %}
 
 {% if events.past.length %}
 <section class="past-events" aria-label="Past events">
-  <h2 class="past-heading">Previously</h2>
+  <h2 class="section-label">Previously</h2>
   {% for ev in events.past %}
   <article class="event-card event-card--past reveal">
     <h3>{{ ev.title }}</h3>

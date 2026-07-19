@@ -19,13 +19,26 @@
   --ghost: #7ff5e0;
   --line: rgba(183, 173, 202, 0.16);
 
-  --font-display: "Big Shoulders Display", "Arial Narrow", sans-serif;
-  --font-body: "Newsreader", Georgia, "Times New Roman", serif;
+  --font-display: "Familjen Grotesk", system-ui, sans-serif;
+  --font-body: "Familjen Grotesk", system-ui, sans-serif;
 
-  --rail: clamp(64px, 11vw, 132px);
-  --content-max: 60rem;
+  --rail: clamp(90px, 13vw, 150px);
+  --content-max: 58rem;
   --radius: 14px;
   --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+
+  /* Type scale — a fifth (1.5) between display steps, held in check by clamps
+     so a wide monitor never blows the headline up past its measure. */
+  --step-eyebrow: 0.8rem;
+  --step-lede: clamp(1.05rem, 1rem + 0.4vw, 1.25rem);
+  --step-h1: clamp(2.25rem, 1.8rem + 2vw, 3rem);
+  --step-h2: clamp(1.8rem, 1.5rem + 1.4vw, 2.5rem);
+  --step-h3: clamp(1.35rem, 1.2rem + 0.6vw, 1.6rem);
+
+  /* Comfortable line lengths. */
+  --measure: 38ch;    /* body/lede prose */
+  --measure-head: 16ch; /* display headings — a tight, stacked marquee */
+  --measure-card: 600px; /* the content column shared by the hero and poster info */
 }
 
 * { box-sizing: border-box; }
@@ -115,12 +128,24 @@ body {
   font-family: var(--font-display);
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.14em;
-  font-size: clamp(1.5rem, 6.4vh, 4.75rem);
+  letter-spacing: 0.1em;
+  font-size: clamp(2rem, 8.5vh, 6rem);
   line-height: 0.95;
   color: var(--amber);
   text-shadow: 0 0 18px var(--amber-glow), 0 0 42px rgba(255, 180, 84, 0.22);
   animation: flicker 6s steps(1) infinite;
+  transition: text-shadow 0.3s var(--ease);
+}
+
+/* Hover/focus: no underline — the marquee just burns brighter and flickers. */
+.wordmark:hover, .wordmark:focus-visible { text-decoration: none; }
+.wordmark:hover span, .wordmark:focus-visible span {
+  text-shadow:
+    0 0 10px #ffd18a,
+    0 0 26px var(--amber),
+    0 0 52px var(--amber-glow),
+    0 0 90px rgba(255, 180, 84, 0.35);
+  animation: flicker-strong 1.4s steps(1) infinite;
 }
 
 @keyframes flicker {
@@ -128,6 +153,18 @@ body {
   93% { opacity: 0.72; }
   94% { opacity: 1; }
   96% { opacity: 0.85; }
+}
+
+@keyframes flicker-strong {
+  0%, 100% { opacity: 1; }
+  8% { opacity: 0.55; }
+  10% { opacity: 1; }
+  18% { opacity: 0.8; }
+  20% { opacity: 1; }
+  62% { opacity: 0.6; }
+  64% { opacity: 1; }
+  85% { opacity: 0.85; }
+  87% { opacity: 1; }
 }
 
 /* --- Nav --------------------------------------------------------------- */
@@ -160,7 +197,7 @@ body {
   transition: color 0.2s var(--ease), border-color 0.2s var(--ease);
 }
 
-.site-nav a:hover { color: var(--ghost); border-bottom-color: var(--ghost); }
+.site-nav a:hover { color: var(--ghost); border-bottom-color: var(--ghost); text-decoration: none; }
 .site-nav a[aria-current="page"] { color: var(--amber); border-bottom-color: var(--amber); }
 
 /* --- Main + shared blocks ---------------------------------------------- */
@@ -184,44 +221,68 @@ main > *:nth-child(4) { animation-delay: 0.27s; }
   to { opacity: 1; transform: none; }
 }
 
-.eyebrow, .section-kicker, .poster-label {
+.section-kicker, .poster-label {
   font-family: var(--font-display);
-  font-weight: 500;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.2em;
-  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  font-size: var(--step-eyebrow);
   color: var(--amber);
-  margin: 0 0 0.5rem;
+  margin: 0 0 0.75rem;
 }
 
 h1, h2, h3 {
   font-family: var(--font-display);
   font-weight: 700;
-  line-height: 1.02;
-  letter-spacing: 0.01em;
+  line-height: 0.98;
+  letter-spacing: 0.005em;
   text-wrap: balance;
+  max-width: var(--measure-head);
   margin: 0 0 0.5rem;
 }
 
 a { color: var(--ghost); text-decoration: none; }
 a:hover { text-decoration: underline; text-underline-offset: 3px; }
 
+/* --- Cards: one consistent surface on every page ----------------------- */
+
+.hero-card, .poster, .event-card, .prose {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  backdrop-filter: blur(6px);
+}
+
 /* --- Hero -------------------------------------------------------------- */
 
-.hero { padding: clamp(1.5rem, 5vh, 4rem) 0 2.5rem; }
+/* The hero headline sits in a full-width card matching the Events/About
+   cards, with the eyebrow kept above it. The headline and lede are
+   constrained and centred inside the wide card. */
+.hero {
+  margin: clamp(1rem, 4vh, 2.5rem) auto 0;
+  text-align: center;
+}
+
+.hero-card { padding: clamp(2rem, 4vw, 3rem); }
 
 .hero h1 {
-  font-size: clamp(2.75rem, 6vw + 1rem, 6rem);
+  max-width: var(--measure-card);
+  font-size: var(--step-h1);
   text-transform: uppercase;
-  margin-bottom: 1rem;
+  margin: 0 auto 1.15rem;
 }
 
 .hero .lede {
-  max-width: 46ch;
-  font-size: clamp(1.1rem, 1rem + 0.5vw, 1.4rem);
+  max-width: var(--measure-card);
+  margin: 0 auto 1.75rem;
+  font-size: var(--step-lede);
+  line-height: 1.55;
   color: var(--ink-dim);
-  margin: 0 0 2rem;
+  text-wrap: pretty;
+  hyphens: none;
 }
+
+.hero .cta-row { justify-content: center; }
 
 /* --- Buttons ----------------------------------------------------------- */
 
@@ -256,39 +317,45 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
 /* --- Page heads + prose ------------------------------------------------ */
 
 .page-head { padding: clamp(1rem, 4vh, 2.5rem) 0 1.5rem; }
-.page-head h1 { font-size: clamp(2.5rem, 5vw + 1rem, 4.5rem); text-transform: uppercase; }
+.page-head h1 { max-width: none; font-size: var(--step-h1); text-transform: uppercase; }
 
-.prose {
-  background: var(--panel);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  padding: clamp(1.5rem, 4vw, 2.5rem);
-  backdrop-filter: blur(6px);
+.prose { padding: clamp(1.5rem, 4vw, 2.75rem); }
+.prose p {
+  max-width: 62ch;
+  margin: 0 0 1.15rem;
+  color: var(--ink);
+  text-wrap: pretty;
 }
-.prose p { margin: 0 0 1.1rem; color: var(--ink); }
 .prose p:last-child { margin-bottom: 0; }
 
 /* --- Feature (home) + poster ------------------------------------------ */
 
-.feature { margin-top: 1rem; }
+.feature { margin-top: 2rem; text-align: center; }
+.feature .section-kicker { margin-bottom: 0; }
 
 .poster {
-  max-width: 520px;
-  margin: 1rem auto 0;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  overflow: hidden;
-  background: var(--panel-solid);
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+  margin: 1.25rem auto 0;
+  padding: clamp(1.5rem, 3vw, 2rem);
+  text-align: left;
 }
 
+/* The square artwork gets its own centred sub-card inside the wide poster. */
+.poster-frame {
+  max-width: 440px;
+  margin: 0 auto 1.75rem;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--panel-solid);
+}
 .poster-image { display: block; width: 100%; height: auto; }
 
 .poster-meta {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 0.9rem 1.5rem;
-  padding: 1.35rem 1.5rem;
+  max-width: var(--measure-card);
+  margin-inline: auto;
   font-size: 0.85rem;
   line-height: 1.45;
 }
@@ -310,15 +377,11 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
 /* --- Event cards ------------------------------------------------------- */
 
 .event-card {
-  background: var(--panel);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
   padding: clamp(1.5rem, 4vw, 2.25rem);
   margin: 1.5rem 0;
-  backdrop-filter: blur(6px);
 }
-.event-card h2 { font-size: clamp(2rem, 4vw, 3rem); text-transform: uppercase; }
-.event-tagline { color: var(--ink-dim); font-size: 1.1rem; margin: 0 0 0.35rem; }
+.event-card h3 { font-size: var(--step-h2); text-transform: uppercase; }
+.event-tagline { color: var(--ink-dim); font-size: 1.1rem; max-width: 46ch; margin: 0 0 0.35rem; }
 .event-note { color: var(--ink-faint); font-style: italic; margin: 0 0 1rem; }
 
 .event-details {
@@ -345,18 +408,26 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
   color: var(--ink-faint);
 }
 
-.empty-state h2 { text-transform: none; font-size: clamp(1.6rem, 3vw, 2.2rem); }
+.empty-state h3 { text-transform: none; font-size: var(--step-h2); }
+.empty-state p { max-width: 54ch; text-wrap: pretty; }
 
-.past-events { margin-top: 3rem; }
-.past-heading {
+/* Section labels — a matched pair introducing the upcoming ("What's on") and
+   past ("Previously") sections, sitting below the page title as muted,
+   full-width dividers. */
+.section-label {
+  width: fit-content;
+  max-width: 100%;
   font-size: 1rem;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.24em;
   color: var(--ink-faint);
   border-bottom: 1px solid var(--line);
-  padding-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+  margin: 0 0 1.5rem;
 }
-.event-card--past { background: rgba(20, 12, 40, 0.4); }
+
+.past-events { margin-top: 3rem; }
 .event-card--past h3 { font-size: 1.5rem; text-transform: uppercase; }
 .event-when { color: var(--ink-faint); margin: 0.25rem 0 0; font-size: 0.9rem; }
 
@@ -420,10 +491,6 @@ footer .fineprint { font-size: 0.82rem; color: var(--ink-faint); }
 
   .masthead { padding-top: 0.75rem; }
   .site-nav ul { justify-content: center; }
-
-  .hero h1 { font-size: clamp(2rem, 8vw, 3rem); }
-  .hero h1 br { display: none; }
-  .page-head h1 { font-size: clamp(2.25rem, 10vw, 3.25rem); }
 
   .poster-meta { grid-template-columns: 1fr; }
   .poster-where, .poster-signup { text-align: left; }

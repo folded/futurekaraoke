@@ -5,7 +5,6 @@ description: Future Karaoke is a laboratory for live performance — a warm, exp
 ---
 
 <div class="page-head">
-  <p class="eyebrow">Who we are</p>
   <h1>About Future Karaoke</h1>
 </div>
 

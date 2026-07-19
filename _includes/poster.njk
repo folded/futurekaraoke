@@ -1,6 +1,8 @@
 {# Renders an event poster. Expects `ev` in context (an events entry). #}
 <figure class="poster">
-  <img src="{{ ev.poster.image }}" alt="{{ ev.poster.alt }}" class="poster-image" width="500" height="500" loading="lazy">
+  <div class="poster-frame">
+    <img src="{{ ev.poster.image }}" alt="{{ ev.poster.alt }}" class="poster-image" width="500" height="500" loading="lazy">
+  </div>
   <figcaption class="poster-meta">
     <div class="poster-what">
       <p class="poster-title">{{ ev.tagline }}</p>

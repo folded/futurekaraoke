@@ -1,0 +1,12 @@
+{
+  "name": "Future Karaoke",
+  "tagline": "A place for imagination and sharing",
+  "description": "Future Karaoke is a multi-disciplinary performance night for poetry, spoken word and live experiment — a warm, supportive stage for new work and the beautifully unfinished.",
+  "url": "https://futurekaraoke.live",
+  "locale": "en_AU",
+  "email": {
+    "tickets": "tickets@futurekaraoke.live",
+    "speak": "speak@futurekaraoke.live"
+  },
+  "ogImage": "/images/future-ghosts.webp"
+}

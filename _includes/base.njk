@@ -4,34 +4,72 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ title or "Future Karaoke" }}</title>
+
+  {% set pageTitle = title or site.name %}
+  {% set pageDesc = description or site.description %}
+  {% set canonical = site.url + page.url %}
+  {% set ogImage = site.url + (image or site.ogImage) %}
+
+  <title>{% if title and title != site.name %}{{ title }} · {{ site.name }}{% else %}{{ site.name }} — {{ site.tagline }}{% endif %}</title>
+  <meta name="description" content="{{ pageDesc }}">
+  <link rel="canonical" href="{{ canonical }}">
+  <meta name="theme-color" content="#0b0716">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="{{ site.name }}">
+  <meta property="og:title" content="{{ pageTitle }}">
+  <meta property="og:description" content="{{ pageDesc }}">
+  <meta property="og:url" content="{{ canonical }}">
+  <meta property="og:image" content="{{ ogImage }}">
+  <meta property="og:locale" content="{{ site.locale }}">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ pageTitle }}">
+  <meta name="twitter:description" content="{{ pageDesc }}">
+  <meta name="twitter:image" content="{{ ogImage }}">
+
+  <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@300;500;700&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&display=swap">
   <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body>
-  <header>
-    <nav>
+  <div class="starfield" aria-hidden="true"></div>
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <a class="wordmark" href="/" aria-label="{{ site.name }} home">
+    <span>{{ site.name }}</span>
+  </a>
+
+  <header class="masthead">
+    <nav class="site-nav" aria-label="Primary">
       <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/events/">Events</a></li>
-        <li><a href="/about/">About</a></li>
+        <li><a href="/"{% if page.url == "/" %} aria-current="page"{% endif %}>Home</a></li>
+        <li><a href="/events/"{% if "/events/" in page.url %} aria-current="page"{% endif %}>Events</a></li>
+        <li><a href="/about/"{% if "/about/" in page.url %} aria-current="page"{% endif %}>About</a></li>
       </ul>
     </nav>
   </header>
 
-  <aside>
-    <div class="vertical-title">
-      <h1>Future Karaoke</h1>
-    </div>
-  </aside>
-
-  <main>
+  <main id="main">
     {{ content | safe }}
   </main>
 
   <footer>
-    <p>&copy; 2025 Future Karaoke</p>
+    <p>
+      <a href="mailto:{{ site.email.speak }}">Sign up to perform</a>
+      <span aria-hidden="true">·</span>
+      <a href="mailto:{{ site.email.tickets }}">Reserve a seat</a>
+    </p>
+    <p class="fineprint">&copy; 2025–2026 {{ site.name }}. Every kind of storyteller welcome.</p>
   </footer>
-
 </body>
+
 </html>

@@ -1,25 +1,52 @@
 ---
 layout: base.njk
-title: Upcoming Events
+title: Events
+description: Upcoming and past Future Karaoke performance nights — poetry, spoken word and live experiment.
 ---
 
-# Upcoming Events
-
-<div class="event-card">
-
-### Future Ghosts
-
-#### An evening of Poetry and Spoken Word @ The Count's
-
-Light refreshments available for purchase at the bar
-
-**Location:** The Ian Potter Centre for Performing Arts
-
-**Address:** [48 Exhibition Walk, Clayton VIC 3168, Australia](https://www.google.com/maps/search/?api=1&query=48+Exhibition+Walk,+Clayton+VIC+3168,+Australia)
-
-**Date:** Tuesday 14th of October, 2025 -- 18:00 - 20:00
-
-This is a free event but please RSVP: [tickets@futurekaraoke.live](mailto:tickets@futurekaraoke.live)
-
-Sign up for a spot on stage: [speak@futurekaraoke.live](mailto:speak@futurekaraoke.live)
+<div class="page-head">
+  <p class="eyebrow">What's on</p>
+  <h1>Events</h1>
 </div>
+
+{% if events.upcoming.length %}
+<section aria-label="Upcoming events">
+  {% for ev in events.upcoming %}
+  <article class="event-card reveal">
+    <h2>{{ ev.title }}</h2>
+    <p class="event-tagline">{{ ev.tagline }}</p>
+    {% if ev.note %}<p class="event-note">{{ ev.note }}</p>{% endif %}
+    <dl class="event-details">
+      <dt>Where</dt>
+      <dd>{{ ev.venue }}<br><a href="{{ ev.mapLink }}" target="_blank" rel="noopener">{{ ev.address }}</a></dd>
+      <dt>When</dt>
+      <dd><time datetime="{{ ev.startISO }}">{{ ev.dateLabel }} · {{ ev.timeLabel }}</time></dd>
+    </dl>
+    <p class="event-actions">
+      <a class="cta cta-primary" href="mailto:{{ site.email.tickets }}">RSVP (free)</a>
+      <a class="cta cta-ghost" href="mailto:{{ site.email.speak }}">Perform</a>
+    </p>
+    {% if ev.funding %}<p class="event-funding">{{ ev.funding }}</p>{% endif %}
+  </article>
+  {% endfor %}
+</section>
+{% else %}
+<section class="event-card reveal empty-state">
+  <h2>No shows on the calendar right now</h2>
+  <p>We're between nights — but not for long. Register your interest to perform and we'll let you know the moment the next date lands.</p>
+  <p class="event-actions"><a class="cta cta-primary" href="mailto:{{ site.email.speak }}">Get on the list</a></p>
+</section>
+{% endif %}
+
+{% if events.past.length %}
+<section class="past-events" aria-label="Past events">
+  <h2 class="past-heading">Previously</h2>
+  {% for ev in events.past %}
+  <article class="event-card event-card--past reveal">
+    <h3>{{ ev.title }}</h3>
+    <p class="event-tagline">{{ ev.tagline }}</p>
+    <p class="event-when"><time datetime="{{ ev.startISO }}">{{ ev.dateLabel }}</time> · {{ ev.venue }}</p>
+  </article>
+  {% endfor %}
+</section>
+{% endif %}

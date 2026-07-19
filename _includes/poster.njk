@@ -1,26 +1,26 @@
-<div class="poster">
-  <img src="{{ poster.image }}" alt="{{ poster.altText }}" class="poster-image">
-  <div class="poster-footer">
-    <div class="col1-row1">
-      <div><b>{{ poster.col1.row1.title }}</b></div>
-      <div>&nbsp;</div>
-      <div>{{ poster.col1.row1.description }}</div>
+{# Renders an event poster. Expects `ev` in context (an events entry). #}
+<figure class="poster">
+  <img src="{{ ev.poster.image }}" alt="{{ ev.poster.alt }}" class="poster-image" width="500" height="500" loading="lazy">
+  <figcaption class="poster-meta">
+    <div class="poster-what">
+      <p class="poster-title">{{ ev.tagline }}</p>
+      {% if ev.note %}<p class="poster-note">{{ ev.note }}</p>{% endif %}
     </div>
-    <div class="col2-row1">
-      <div><b>{{ poster.col2.row1.title }}</b></div>
-      <div><a href="{{ poster.col2.row1.mapLink }}" target="_blank">{{ poster.col2.row1.address }}</a></div>
-      <div>{{ poster.col2.row1.date }}</div>
+    <div class="poster-where">
+      <p class="poster-venue">{{ ev.venue }}</p>
+      <p><a href="{{ ev.mapLink }}" target="_blank" rel="noopener">{{ ev.address }}</a></p>
+      <p><time datetime="{{ ev.startISO }}">{{ ev.dateLabel }} · {{ ev.timeLabel }}</time></p>
     </div>
-    <div class="col1-row2">
-      <div><i>This is a free event but please RSVP:</i></div>
-      <div><a href="mailto:tickets@futurekaraoke.live">tickets@futurekaraoke.live</a></div>
+    {% if not ev.isPast %}
+    <div class="poster-rsvp">
+      <p class="poster-label">Free event — please RSVP</p>
+      <p><a href="mailto:{{ site.email.tickets }}">{{ site.email.tickets }}</a></p>
     </div>
-    <div class="col2-row2">
-      <div><i>Sign up for a spot on stage:</i></div>
-      <div><a href="mailto:speak@futurekaraoke.live">speak@futurekaraoke.live</a></div>
+    <div class="poster-signup">
+      <p class="poster-label">Take the stage</p>
+      <p><a href="mailto:{{ site.email.speak }}">{{ site.email.speak }}</a></p>
     </div>
-    <div class="row3">
-      <div>{{ poster.row3 }}</div>
-    </div>
-  </div>
-</div>
+    {% endif %}
+    {% if ev.funding %}<p class="poster-funding">{{ ev.funding }}</p>{% endif %}
+  </figcaption>
+</figure>

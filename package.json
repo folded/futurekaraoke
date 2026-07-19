@@ -1,16 +1,14 @@
 {
   "name": "futurekaraoke",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "build": "npx @11ty/eleventy",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
+  "description": "Future Karaoke — a multi-disciplinary performance night. Eleventy static site.",
   "license": "ISC",
   "type": "commonjs",
+  "scripts": {
+    "build": "eleventy",
+    "serve": "eleventy --serve",
+    "clean": "rm -rf _site"
+  },
   "dependencies": {
     "@11ty/eleventy": "^3.1.2"
   }

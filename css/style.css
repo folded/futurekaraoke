@@ -355,6 +355,9 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
 }
 .poster-meta p { margin: 0; }
 .poster-where, .poster-signup { text-align: right; }
+/* A coming-soon poster has no RSVP column to balance against, so its notice
+   spans the full width and centres instead of hugging the right edge. */
+.poster-signup--wide { grid-column: 1 / -1; text-align: center; }
 .poster-title { font-weight: 500; color: var(--ink); }
 .poster-note, .poster-venue { color: var(--ink-dim); }
 .poster-label { margin-bottom: 0.2rem; font-size: 0.66rem; }
@@ -375,45 +378,7 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
   margin: 1.5rem 0;
 }
 .event-card h3 { font-size: var(--step-h2); text-transform: uppercase; }
-.event-badge {
-  display: inline-block;
-  vertical-align: middle;
-  margin-left: 0.6rem;
-  font-family: var(--font-display);
-  font-size: 0.7rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--amber);
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  padding: 0.2rem 0.65rem;
-}
-.event-tagline { color: var(--ink-dim); font-size: 1.1rem; max-width: 46ch; margin: 0 0 0.35rem; }
-.event-note { color: var(--ink-faint); font-style: italic; margin: 0 0 1rem; }
-
-.event-details {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 0.35rem 1.5rem;
-  margin: 1.25rem 0;
-}
-.event-details dt {
-  font-family: var(--font-display);
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-  font-size: 0.78rem;
-  color: var(--amber);
-  padding-top: 0.15rem;
-}
-.event-details dd { margin: 0; color: var(--ink); }
-
 .event-actions { display: flex; flex-wrap: wrap; gap: 0.85rem; margin: 1.25rem 0 0; }
-.event-funding {
-  margin: 1.25rem 0 0;
-  font-size: 0.82rem;
-  font-style: italic;
-  color: var(--ink-faint);
-}
 
 .empty-state h3 { text-transform: none; font-size: var(--step-h2); }
 .empty-state p { max-width: 54ch; text-wrap: pretty; }
@@ -435,8 +400,6 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
 }
 
 .past-events { margin-top: 3rem; }
-.event-card--past h3 { font-size: 1.5rem; text-transform: uppercase; }
-.event-when { color: var(--ink-faint); margin: 0.25rem 0 0; font-size: 0.9rem; }
 
 /* --- Footer ------------------------------------------------------------ */
 

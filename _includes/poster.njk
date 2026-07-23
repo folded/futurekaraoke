@@ -12,7 +12,7 @@
     </div>
     <div class="poster-where">
       {%- if ev.isComingSoon %}
-      <p class="poster-venue">Date &amp; venue to be announced</p>
+      <p class="poster-venue">Date to be announced</p>
       {%- else %}
       <p class="poster-venue">{{ ev.venue }}</p>
       <p><a href="{{ ev.mapLink }}" target="_blank" rel="noopener">{{ ev.address }}</a></p>
@@ -20,7 +20,7 @@
       {%- endif %}
     </div>
     {%- if ev.isComingSoon %}
-    <div class="poster-signup">
+    <div class="poster-signup poster-signup--wide">
       <p class="poster-label">Coming soon</p>
       <p>Register your interest and we'll tell you the moment the date lands.</p>
       <p><a href="mailto:{{ site.email.speak }}">{{ site.email.speak }}</a></p>

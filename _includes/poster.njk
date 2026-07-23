@@ -1,19 +1,31 @@
 {# Renders an event poster. Expects `ev` in context (an events entry). #}
 <figure class="poster">
   <div class="poster-frame">
-    <img src="{{ ev.poster.image }}" alt="{{ ev.poster.alt }}" class="poster-image" width="500" height="500" loading="lazy">
+    <img src="{{ ev.poster.image }}" alt="{{ ev.poster.alt }}" class="poster-image" width="{{ ev.poster.width or 500 }}" height="{{ ev.poster.height or 500 }}" loading="lazy">
   </div>
   <figcaption class="poster-meta">
     <div class="poster-what">
       <p class="poster-title">{{ ev.tagline }}</p>
-      {% if ev.note %}<p class="poster-note">{{ ev.note }}</p>{% endif %}
+      {%- if ev.note %}
+      <p class="poster-note">{{ ev.note }}</p>
+      {%- endif %}
     </div>
     <div class="poster-where">
+      {%- if ev.isComingSoon %}
+      <p class="poster-venue">Date &amp; venue to be announced</p>
+      {%- else %}
       <p class="poster-venue">{{ ev.venue }}</p>
       <p><a href="{{ ev.mapLink }}" target="_blank" rel="noopener">{{ ev.address }}</a></p>
       <p><time datetime="{{ ev.startISO }}">{{ ev.dateLabel }} · {{ ev.timeLabel }}</time></p>
+      {%- endif %}
     </div>
-    {% if not ev.isPast %}
+    {%- if ev.isComingSoon %}
+    <div class="poster-signup">
+      <p class="poster-label">Coming soon</p>
+      <p>Register your interest and we'll tell you the moment the date lands.</p>
+      <p><a href="mailto:{{ site.email.speak }}">{{ site.email.speak }}</a></p>
+    </div>
+    {%- elif not ev.isPast %}
     <div class="poster-rsvp">
       <p class="poster-label">Free event — please RSVP</p>
       <p><a href="mailto:{{ site.email.tickets }}">{{ site.email.tickets }}</a></p>
@@ -22,7 +34,9 @@
       <p class="poster-label">Take the stage</p>
       <p><a href="mailto:{{ site.email.speak }}">{{ site.email.speak }}</a></p>
     </div>
-    {% endif %}
-    {% if ev.funding %}<p class="poster-funding">{{ ev.funding }}</p>{% endif %}
+    {%- endif %}
+    {%- if ev.funding %}
+    <p class="poster-funding">{{ ev.funding }}</p>
+    {%- endif %}
   </figcaption>
 </figure>

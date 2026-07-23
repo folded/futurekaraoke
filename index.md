@@ -16,8 +16,8 @@ title: Future Karaoke
 
 {% if events.featured %}
 {% set ev = events.featured %}
-<section class="feature reveal" aria-label="{% if ev.isPast %}Most recent{% else %}Next{% endif %} event">
-  <p class="section-kicker">{% if ev.isPast %}Most recently{% else %}Next up{% endif %} · {{ ev.title }}</p>
+<section class="feature reveal" aria-label="{% if ev.isComingSoon %}Coming soon{% elif ev.isPast %}Most recent{% else %}Next{% endif %} event">
+  <p class="section-kicker">{% if ev.isComingSoon %}Coming soon{% elif ev.isPast %}Most recently{% else %}Next up{% endif %} · {{ ev.title }}</p>
   {% include "poster.njk" %}
 </section>
 {% endif %}

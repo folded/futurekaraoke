@@ -375,6 +375,19 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
   margin: 1.5rem 0;
 }
 .event-card h3 { font-size: var(--step-h2); text-transform: uppercase; }
+.event-badge {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 0.6rem;
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--amber);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0.2rem 0.65rem;
+}
 .event-tagline { color: var(--ink-dim); font-size: 1.1rem; max-width: 46ch; margin: 0 0 0.35rem; }
 .event-note { color: var(--ink-faint); font-style: italic; margin: 0 0 1rem; }
 

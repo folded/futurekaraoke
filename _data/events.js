@@ -21,9 +21,26 @@ const events = [
     poster: {
       image: "/images/future-ghosts.webp",
       alt: "Future Ghosts — poetry and spoken word, painted in a cosmic, ghostly palette",
+      width: 1447,
+      height: 1811,
     },
     funding:
       "Future Ghosts is supported by funding from The School of Languages, Literatures, Cultures & Linguistics, Monash University.",
+  },
+  {
+    // A "coming soon" event has no date yet. Omit `start`/`end` and set
+    // `comingSoon: true`; the decorate step below skips date formatting and the
+    // templates fall back to a "date to be announced" treatment.
+    slug: "bodies-of-water",
+    title: "Bodies of Water",
+    tagline: "An evening of Poetry and Spoken Word",
+    comingSoon: true,
+    poster: {
+      image: "/images/bodies-of-water.webp",
+      alt: "Bodies of Water — poetry and spoken word",
+      width: 1000,
+      height: 605,
+    },
   },
 ];
 
@@ -43,10 +60,15 @@ const timeFmt = new Intl.DateTimeFormat("en-AU", {
 });
 
 function decorate(event) {
+  if (event.comingSoon) {
+    // No date yet: nothing to format, and it's never "past".
+    return { ...event, isComingSoon: true, isPast: false };
+  }
   const start = new Date(event.start);
   const end = new Date(event.end);
   return {
     ...event,
+    isComingSoon: false,
     startISO: event.start,
     dateLabel: dateFmt.format(start),
     timeLabel: `${timeFmt.format(start)} – ${timeFmt.format(end)}`,
@@ -55,9 +77,14 @@ function decorate(event) {
 }
 
 module.exports = () => {
-  const all = events
-    .map(decorate)
-    .sort((a, b) => new Date(a.start) - new Date(b.start));
+  const all = events.map(decorate).sort((a, b) => {
+    // Dated events sort chronologically; undated "coming soon" events sort to
+    // the end so a concrete date always takes precedence when featuring.
+    if (a.isComingSoon || b.isComingSoon) {
+      return (a.isComingSoon ? 1 : 0) - (b.isComingSoon ? 1 : 0);
+    }
+    return new Date(a.start) - new Date(b.start);
+  });
 
   const upcoming = all.filter((e) => !e.isPast);
   const past = all.filter((e) => e.isPast).reverse(); // most recent first

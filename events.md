@@ -13,9 +13,17 @@ description: Upcoming and past Future Karaoke performance nights — poetry, spo
   {% if events.upcoming.length %}
   {% for ev in events.upcoming %}
   <article class="event-card reveal">
-    <h3>{{ ev.title }}</h3>
+    <h3>{{ ev.title }}{% if ev.isComingSoon %} <span class="event-badge">Coming soon</span>{% endif %}</h3>
     <p class="event-tagline">{{ ev.tagline }}</p>
-    {% if ev.note %}<p class="event-note">{{ ev.note }}</p>{% endif %}
+    {%- if ev.note %}
+    <p class="event-note">{{ ev.note }}</p>
+    {%- endif %}
+    {%- if ev.isComingSoon %}
+    <p class="event-note">Date and venue to be announced — register your interest and we'll tell you the moment the next date lands.</p>
+    <p class="event-actions">
+      <a class="cta cta-primary" href="mailto:{{ site.email.speak }}">Get on the list</a>
+    </p>
+    {%- else %}
     <dl class="event-details">
       <dt>Where</dt>
       <dd>{{ ev.venue }}<br><a href="{{ ev.mapLink }}" target="_blank" rel="noopener">{{ ev.address }}</a></dd>
@@ -26,7 +34,10 @@ description: Upcoming and past Future Karaoke performance nights — poetry, spo
       <a class="cta cta-primary" href="mailto:{{ site.email.tickets }}">RSVP (free)</a>
       <a class="cta cta-ghost" href="mailto:{{ site.email.speak }}">Perform</a>
     </p>
-    {% if ev.funding %}<p class="event-funding">{{ ev.funding }}</p>{% endif %}
+    {%- endif %}
+    {%- if ev.funding %}
+    <p class="event-funding">{{ ev.funding }}</p>
+    {%- endif %}
   </article>
   {% endfor %}
   {% else %}

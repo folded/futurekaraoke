@@ -3,6 +3,10 @@
 // Add an event by appending an object to `events` below. The template layer
 // never needs editing: upcoming/past sorting and human-readable date labels
 // are all derived here at build time.
+//
+// A "coming soon" event has no date yet. Omit `start`/`end` and set
+// `comingSoon: true`; the decorate step below skips date formatting and the
+// templates fall back to a "date to be announced" treatment.
 
 const TIME_ZONE = "Australia/Melbourne";
 
@@ -28,21 +32,24 @@ const events = [
       "Future Ghosts is supported by funding from The School of Languages, Literatures, Cultures & Linguistics, Monash University.",
   },
   {
-    // A "coming soon" event has no date yet. Omit `start`/`end` and set
-    // `comingSoon: true`; the decorate step below skips date formatting and the
-    // templates fall back to a "date to be announced" treatment.
     slug: "bodies-of-water",
     title: "Bodies of Water",
-    tagline: "An evening of Poetry and Spoken Word",
-    // Venue not yet confirmed: add `venue`, `address` and `mapLink` once known.
+    tagline: "An evening of Poetry and Spoken Word @ The Count's",
+    note: "Light refreshments provided. Drinks available at the bar",
+    venue: "The Ian Potter Centre for Performing Arts",
+    address: "48 Exhibition Walk, Clayton VIC 3168, Australia",
+    mapLink:
+      "https://www.google.com/maps/search/?api=1&query=48+Exhibition+Walk,+Clayton+VIC+3168,+Australia",
     start: "2026-10-15T18:00:00+11:00",
     end: "2026-10-15T20:00:00+11:00",
     poster: {
       image: "/images/bodies-of-water.webp",
-      alt: "Bodies of Water — poetry and spoken word",
+      alt: "Bodies of Water — poetry and spoken word, over a painting of a river winding through marshland",
       width: 1000,
-      height: 605,
+      height: 706,
     },
+    funding:
+      "Future Karaoke is supported by funding from The School of Languages, Literatures, Cultures & Linguistics, Monash University.",
   },
 ];
 

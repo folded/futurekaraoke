@@ -32,7 +32,11 @@
     {%- elif not ev.isPast %}
     <div class="poster-rsvp">
       <p class="poster-label">Free event — please RSVP</p>
+      {%- if ev.tickets %}
+      <p><a href="{{ ev.tickets }}" target="_blank" rel="noopener">Reserve a seat on Eventbrite</a></p>
+      {%- else %}
       <p><a href="mailto:{{ site.email.tickets }}">{{ site.email.tickets }}</a></p>
+      {%- endif %}
     </div>
     <div class="poster-signup">
       <p class="poster-label">Take the stage</p>

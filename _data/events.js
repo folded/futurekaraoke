@@ -42,6 +42,9 @@ const events = [
       "https://www.google.com/maps/search/?api=1&query=48+Exhibition+Walk,+Clayton+VIC+3168,+Australia",
     start: "2026-10-15T18:00:00+11:00",
     end: "2026-10-15T20:00:00+11:00",
+    // Optional: when set, RSVP links go here instead of the tickets mailbox.
+    tickets:
+      "https://www.eventbrite.com.au/e/future-karaoke-presents-bodies-of-water-tickets-1999929661454",
     poster: {
       image: "/images/bodies-of-water.webp",
       alt: "Bodies of Water — poetry and spoken word, over a painting of a river winding through marshland",

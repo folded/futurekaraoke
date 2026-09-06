@@ -68,7 +68,11 @@
     <p>
       <a href="mailto:{{ site.email.speak }}">Sign up to perform</a>
       <span aria-hidden="true">·</span>
+      {%- if events.next and events.next.tickets %}
+      <a href="{{ events.next.tickets }}" target="_blank" rel="noopener">Reserve a seat</a>
+      {%- else %}
       <a href="mailto:{{ site.email.tickets }}">Reserve a seat</a>
+      {%- endif %}
     </p>
     <p class="fineprint">&copy; 2025–2026 {{ site.name }}. Every kind of storyteller welcome.</p>
   </footer>

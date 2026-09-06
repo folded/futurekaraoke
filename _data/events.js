@@ -34,7 +34,9 @@ const events = [
     slug: "bodies-of-water",
     title: "Bodies of Water",
     tagline: "An evening of Poetry and Spoken Word",
-    comingSoon: true,
+    // Venue not yet confirmed: add `venue`, `address` and `mapLink` once known.
+    start: "2026-10-15T18:00:00+11:00",
+    end: "2026-10-15T20:00:00+11:00",
     poster: {
       image: "/images/bodies-of-water.webp",
       alt: "Bodies of Water — poetry and spoken word",

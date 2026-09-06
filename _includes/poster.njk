@@ -14,8 +14,12 @@
       {%- if ev.isComingSoon %}
       <p class="poster-venue">Date to be announced</p>
       {%- else %}
+      {%- if ev.venue %}
       <p class="poster-venue">{{ ev.venue }}</p>
+      {%- endif %}
+      {%- if ev.address %}
       <p><a href="{{ ev.mapLink }}" target="_blank" rel="noopener">{{ ev.address }}</a></p>
+      {%- endif %}
       <p><time datetime="{{ ev.startISO }}">{{ ev.dateLabel }} · {{ ev.timeLabel }}</time></p>
       {%- endif %}
     </div>

@@ -57,7 +57,7 @@ const events = [
       height: 706,
     },
     funding:
-      "Future Karaoke is supported by funding from The School of Languages, Literatures, Cultures & Linguistics, Monash University.",
+      "Bodies of Water is supported by the Faculty of Arts, Monash University. Future Karaoke is supported by funding from The School of Languages, Literatures, Cultures & Linguistics, Monash University.",
   },
 ];
 

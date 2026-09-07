@@ -355,6 +355,15 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
 .poster-title { font-weight: 500; color: var(--ink); }
 .poster-note, .poster-venue { color: var(--ink-dim); }
 .poster-label { margin-bottom: 0.2rem; font-size: 0.66rem; }
+/* Longer event description: spans both columns, reads as body copy. */
+.poster-about {
+  grid-column: 1 / -1;
+  color: var(--ink-dim);
+  text-wrap: pretty;
+  border-top: 1px solid var(--line);
+  padding-top: 0.9rem;
+}
+.poster-about p + p { margin-top: 0.6rem; }
 .poster-funding {
   grid-column: 1 / -1;
   text-align: center;

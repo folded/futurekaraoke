@@ -23,6 +23,13 @@
       <p><time datetime="{{ ev.startISO }}">{{ ev.dateLabel }} · {{ ev.timeLabel }}</time></p>
       {%- endif %}
     </div>
+    {%- if ev.about %}
+    <div class="poster-about">
+      {%- for para in ev.about %}
+      <p>{{ para }}</p>
+      {%- endfor %}
+    </div>
+    {%- endif %}
     {%- if ev.isComingSoon %}
     <div class="poster-signup poster-signup--wide">
       <p class="poster-label">Coming soon</p>

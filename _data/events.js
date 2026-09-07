@@ -36,6 +36,11 @@ const events = [
     title: "Bodies of Water",
     tagline: "An evening of Poetry and Spoken Word @ The Count's",
     note: "Light refreshments provided. Drinks available at the bar",
+    // Optional: one string per paragraph, shown beneath the poster's date line.
+    about: [
+      "The theme Bodies of Water invites interdisciplinary interpretation to initiate vital conversations about climate change and environmental ethics. Grounded in the premise that humans are inextricably connected to hydrological systems, that we are all literally and philosophically bodies of water, this project pairs a pre-event creative writing workshop with a live performance showcase at The Count’s.",
+      "The workshop provides writers from all disciplines dedicated time to write, redraft, polish, and rehearse their work before stepping onto the stage. Supported by Monash creative writing faculty, the initiative offers students and researchers across all fields time to develop their creative practice and share poetry, prose, non-fiction, and soundscapes on stage.",
+    ],
     venue: "The Ian Potter Centre for Performing Arts",
     address: "48 Exhibition Walk, Clayton VIC 3168, Australia",
     mapLink:

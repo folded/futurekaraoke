@@ -268,7 +268,7 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
 
 .hero .lede {
   max-width: var(--measure-card);
-  margin: 0 auto 1.75rem;
+  margin: 0 auto;
   font-size: var(--step-lede);
   line-height: 1.55;
   color: var(--ink-dim);
@@ -276,11 +276,7 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
   hyphens: none;
 }
 
-.hero .cta-row { justify-content: center; }
-
 /* --- Buttons ----------------------------------------------------------- */
-
-.cta-row { display: flex; flex-wrap: wrap; gap: 0.85rem; }
 
 .cta {
   display: inline-block;
@@ -305,8 +301,6 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
 }
 .cta-primary:hover { box-shadow: 0 8px 30px var(--amber-glow); }
 
-.cta-ghost { color: var(--ink); border-color: var(--line); }
-.cta-ghost:hover { border-color: var(--ghost); color: var(--ghost); }
 
 /* --- Page heads + prose ------------------------------------------------ */
 
@@ -411,8 +405,6 @@ footer {
   color: var(--ink-dim);
 }
 footer p { margin: 0.35rem 0; }
-footer a { color: var(--ink-dim); }
-footer a:hover { color: var(--ghost); }
 footer .fineprint { font-size: 0.82rem; color: var(--ink-faint); }
 
 /* --- Utilities --------------------------------------------------------- */

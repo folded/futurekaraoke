@@ -16,6 +16,9 @@ title: Future Karaoke
   <p class="section-kicker">{% if ev.isComingSoon %}Coming soon{% elif ev.isPast %}Most recently{% else %}Next up{% endif %} · {{ ev.title }}</p>
   {% include "poster.njk" %}
 </section>
+{% if ev.workshop and not ev.workshop.isPast %}
+{% include "workshop.njk" %}
+{% endif %}
 {% endif %}
 
 {# When the featured slot is taken by an upcoming/coming-soon show, still keep

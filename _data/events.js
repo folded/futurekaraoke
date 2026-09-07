@@ -45,6 +45,17 @@ const events = [
     address: "48 Exhibition Walk, Clayton VIC 3168, Australia",
     mapLink:
       "https://www.google.com/maps/search/?api=1&query=48+Exhibition+Walk,+Clayton+VIC+3168,+Australia",
+    // Optional companion session shown as its own card beneath the poster
+    // while it's still upcoming. It never competes for the featured slot.
+    workshop: {
+      title: "Pre-event writing workshop",
+      start: "2026-09-30T14:00:00+10:00",
+      end: "2026-09-30T16:00:00+10:00",
+      venue: "Monash University, Clayton Campus",
+      venueNote: "Room to be confirmed",
+      blurb:
+        "Dedicated time to write, redraft, polish and rehearse your piece before stepping onto the stage, with support from Monash creative writing faculty. Open to students and researchers across all fields.",
+    },
     start: "2026-10-15T18:00:00+11:00",
     end: "2026-10-15T20:00:00+11:00",
     // Optional: when set, RSVP links go here instead of the tickets mailbox.
@@ -76,20 +87,27 @@ const timeFmt = new Intl.DateTimeFormat("en-AU", {
   timeZone: TIME_ZONE,
 });
 
+function dated(item) {
+  const start = new Date(item.start);
+  const end = new Date(item.end);
+  return {
+    ...item,
+    startISO: item.start,
+    dateLabel: dateFmt.format(start),
+    timeLabel: `${timeFmt.format(start)} – ${timeFmt.format(end)}`,
+    isPast: end.getTime() < Date.now(),
+  };
+}
+
 function decorate(event) {
   if (event.comingSoon) {
     // No date yet: nothing to format, and it's never "past".
     return { ...event, isComingSoon: true, isPast: false };
   }
-  const start = new Date(event.start);
-  const end = new Date(event.end);
   return {
-    ...event,
+    ...dated(event),
     isComingSoon: false,
-    startISO: event.start,
-    dateLabel: dateFmt.format(start),
-    timeLabel: `${timeFmt.format(start)} – ${timeFmt.format(end)}`,
-    isPast: end.getTime() < Date.now(),
+    workshop: event.workshop ? dated(event.workshop) : null,
   };
 }
 

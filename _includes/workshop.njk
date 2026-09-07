@@ -1,0 +1,21 @@
+{# Companion workshop card. Expects `ev` (the parent event) in context. #}
+{%- set ws = ev.workshop %}
+<section class="feature companion reveal" aria-label="{{ ev.title }} workshop">
+  <p class="section-kicker">Before the show · {{ ev.title }}</p>
+  <div class="event-card companion-card">
+    <h3>{{ ws.title }}</h3>
+    <div class="companion-meta">
+      <div>
+        <p><time datetime="{{ ws.startISO }}">{{ ws.dateLabel }} · {{ ws.timeLabel }}</time></p>
+        <p class="poster-venue">{{ ws.venue }}{% if ws.venueNote %} · {{ ws.venueNote }}{% endif %}</p>
+      </div>
+      <div class="companion-cta">
+        <p class="poster-label">Take part</p>
+        <p><a class="btn btn-ghost" href="mailto:{{ site.email.speak }}">Register for the workshop</a></p>
+      </div>
+    </div>
+    {%- if ws.blurb %}
+    <p class="companion-blurb">{{ ws.blurb }}</p>
+    {%- endif %}
+  </div>
+</section>

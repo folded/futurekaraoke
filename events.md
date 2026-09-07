@@ -16,6 +16,9 @@ description: Upcoming and past Future Karaoke performance nights — poetry, spo
     <p class="section-kicker">{% if ev.isComingSoon %}Coming soon · {% endif %}{{ ev.title }}</p>
     {% include "poster.njk" %}
   </div>
+  {% if ev.workshop and not ev.workshop.isPast %}
+  {% include "workshop.njk" %}
+  {% endif %}
   {% endfor %}
   {% else %}
   <div class="event-card reveal empty-state">

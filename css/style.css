@@ -430,6 +430,38 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
 .event-card h3 { font-size: var(--step-h2); text-transform: uppercase; }
 .event-actions { display: flex; flex-wrap: wrap; gap: 0.85rem; margin: 1.25rem 0 0; }
 
+/* Companion card: a smaller session attached to a show (e.g. a pre-event
+   workshop). Sits directly beneath the poster card, same width, lighter. */
+.companion-card {
+  margin: 1.25rem auto 0;
+  text-align: left;
+}
+.companion-card h3 {
+  font-size: var(--step-h3);
+  max-width: var(--measure-card);
+  margin: 0 auto 0.9rem;
+}
+.companion-meta {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.9rem 1.5rem;
+  align-items: end;
+  max-width: var(--measure-card);
+  margin-inline: auto;
+  font-size: 0.85rem;
+  line-height: 1.45;
+}
+.companion-meta p { margin: 0; }
+.companion-cta { text-align: right; }
+.companion-blurb {
+  max-width: var(--measure-card);
+  margin: 0.9rem auto 0;
+  font-size: 0.85rem;
+  line-height: 1.45;
+  color: var(--ink-dim);
+  text-wrap: pretty;
+}
+
 .empty-state h3 { text-transform: none; font-size: var(--step-h2); }
 .empty-state p { max-width: 54ch; text-wrap: pretty; }
 
@@ -514,8 +546,11 @@ footer .fineprint { font-size: 0.82rem; color: var(--ink-faint); }
   .poster-where, .poster-signup { text-align: left; }
   .poster-signup--wide { text-align: left; }
 
+  .companion-meta { grid-template-columns: 1fr; }
+  .companion-cta { text-align: left; }
+
   /* Buttons go full width so the label never wraps to two lines. */
-  .poster-meta .btn, .event-actions .btn { display: block; text-align: center; }
+  .poster-meta .btn, .event-actions .btn, .companion-meta .btn { display: block; text-align: center; }
   .event-actions { display: block; }
 }
 

@@ -67,6 +67,21 @@
   <footer>
     <p class="fineprint">&copy; 2025–2026 {{ site.name }}. Every kind of storyteller welcome.</p>
   </footer>
+
+  <script>
+    // Fade each button's travelling highlight in once it's well inside the
+    // viewport (hover isn't available on touch). Without JS the CSS default
+    // leaves the highlight always on.
+    document.documentElement.classList.add("js");
+    if ("IntersectionObserver" in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { e.target.classList.toggle("in-view", e.isIntersecting); });
+      }, { threshold: 0.6, rootMargin: "-12% 0px -12% 0px" });
+      document.querySelectorAll(".btn").forEach(function (b) { io.observe(b); });
+    } else {
+      document.documentElement.classList.remove("js");
+    }
+  </script>
 </body>
 
 </html>

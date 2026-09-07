@@ -21,7 +21,7 @@ description: Upcoming and past Future Karaoke performance nights — poetry, spo
   <div class="event-card reveal empty-state">
     <h3>No shows on the calendar right now</h3>
     <p>We're between nights — but not for long. Register your interest to perform and we'll let you know the moment the next date lands.</p>
-    <p class="event-actions"><a class="cta cta-primary" href="mailto:{{ site.email.speak }}">Get on the list</a></p>
+    <p class="event-actions"><a class="btn" href="mailto:{{ site.email.speak }}">Get on the list</a></p>
   </div>
   {% endif %}
 </section>

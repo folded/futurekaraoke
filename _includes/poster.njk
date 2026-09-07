@@ -33,21 +33,22 @@
     {%- if ev.isComingSoon %}
     <div class="poster-signup poster-signup--wide">
       <p class="poster-label">Coming soon</p>
-      <p>Register your interest and we'll tell you the moment the date lands.</p>
-      <p><a href="mailto:{{ site.email.speak }}">{{ site.email.speak }}</a></p>
+      <p>We'll tell you the moment the date lands.</p>
+      <p><a class="btn btn-ghost" href="mailto:{{ site.email.speak }}">Register your interest</a></p>
     </div>
     {%- elif not ev.isPast %}
     <div class="poster-rsvp">
-      <p class="poster-label">Free event — please RSVP</p>
       {%- if ev.tickets %}
-      <p><a href="{{ ev.tickets }}" target="_blank" rel="noopener">Reserve a seat on Eventbrite</a></p>
+      <p class="poster-label">Free event — RSVP on Eventbrite</p>
+      <p><a class="btn" href="{{ ev.tickets }}" target="_blank" rel="noopener">Reserve a seat</a></p>
       {%- else %}
-      <p><a href="mailto:{{ site.email.tickets }}">{{ site.email.tickets }}</a></p>
+      <p class="poster-label">Free event — please RSVP</p>
+      <p><a class="btn" href="mailto:{{ site.email.tickets }}">Reserve a seat</a></p>
       {%- endif %}
     </div>
     <div class="poster-signup">
       <p class="poster-label">Take the stage</p>
-      <p><a href="mailto:{{ site.email.speak }}">{{ site.email.speak }}</a></p>
+      <p><a class="btn btn-ghost" href="mailto:{{ site.email.speak }}">Sign up to perform</a></p>
     </div>
     {%- endif %}
     {%- if ev.funding %}

@@ -276,31 +276,78 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
   hyphens: none;
 }
 
-/* --- Buttons ----------------------------------------------------------- */
+/* --- Buttons: "transmission" outlines --------------------------------- */
 
-.cta {
+/* Every action on the site is a pill outline in the display face. A bright
+   highlight travels around the border, echoing the pulses that run along the
+   background line-art. The highlight is faded in by a small script once the
+   button scrolls into view (hover can't be relied on for touch), and hover or
+   focus makes it run hotter. Without JS the highlight is simply always on. */
+
+@property --beam-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+.btn {
+  --btn-color: var(--amber);
+  --btn-bright: #ffd18a;
+  --btn-faint: rgba(255, 180, 84, 0.35);
+  --btn-glow: var(--amber-glow);
+  position: relative;
   display: inline-block;
+  margin-top: 0.3rem;
   font-family: var(--font-display);
-  font-weight: 500;
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.11em;
-  font-size: 0.95rem;
-  padding: 0.7rem 1.5rem;
+  font-size: 0.8rem;
+  line-height: 1;
+  white-space: nowrap;
+  padding: 0.8rem 1.35rem;
   border-radius: 999px;
-  border: 1px solid transparent;
-  transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease),
-    background-color 0.2s var(--ease), color 0.2s var(--ease);
+  border: 1.5px solid var(--btn-faint);
+  color: var(--btn-color);
+  background: var(--panel-solid);
+  text-decoration: none;
+  transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease), color 0.2s var(--ease);
+}
+.btn:hover, .btn:focus-visible { text-decoration: none; color: var(--btn-bright); transform: translateY(-2px); box-shadow: 0 8px 30px var(--btn-glow); }
+
+.btn-ghost {
+  --btn-color: var(--ghost);
+  --btn-bright: #d9fff6;
+  --btn-faint: rgba(127, 245, 224, 0.3);
+  --btn-glow: rgba(127, 245, 224, 0.22);
 }
 
-.cta:hover { text-decoration: none; transform: translateY(-2px); }
-
-.cta-primary {
-  background: var(--amber);
-  color: #1a1005;
-  box-shadow: 0 0 0 rgba(255, 180, 84, 0);
+/* The travelling highlight: a conic gradient masked down to the border ring. */
+.btn::before {
+  content: "";
+  position: absolute;
+  inset: -1.5px;
+  padding: 1.5px;
+  border-radius: inherit;
+  background: conic-gradient(from var(--beam-angle),
+    transparent 0 58%, var(--btn-color) 76%, var(--btn-bright) 81%, transparent 95%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+  animation: beam 3.2s linear infinite;
+  transition: opacity 0.9s var(--ease);
 }
-.cta-primary:hover { box-shadow: 0 8px 30px var(--amber-glow); }
+/* Stagger neighbouring buttons so their highlights aren't in lockstep. */
+.btn:nth-of-type(even)::before, .poster-signup .btn::before { animation-delay: -1.6s; }
+.btn:hover::before, .btn:focus-visible::before { animation-duration: 1.4s; }
 
+/* With JS: hidden and paused until the button is on screen. */
+.js .btn::before { opacity: 0; animation-play-state: paused; }
+.js .btn.in-view::before { opacity: 1; animation-play-state: running; }
+
+@keyframes beam { to { --beam-angle: 360deg; } }
 
 /* --- Page heads + prose ------------------------------------------------ */
 
@@ -465,6 +512,11 @@ footer .fineprint { font-size: 0.82rem; color: var(--ink-faint); }
 
   .poster-meta { grid-template-columns: 1fr; }
   .poster-where, .poster-signup { text-align: left; }
+  .poster-signup--wide { text-align: left; }
+
+  /* Buttons go full width so the label never wraps to two lines. */
+  .poster-meta .btn, .event-actions .btn { display: block; text-align: center; }
+  .event-actions { display: block; }
 }
 
 /* --- Motion preferences ------------------------------------------------ */
@@ -475,4 +527,6 @@ footer .fineprint { font-size: 0.82rem; color: var(--ink-faint); }
     transition: none !important;
     scroll-behavior: auto !important;
   }
+  .btn::before { display: none; }
+  .btn { border-color: var(--btn-color); }
 }
